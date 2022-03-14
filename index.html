@@ -9,13 +9,71 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <nav class="flex menu">
         <div>
             <h1>Editor LRC</h1>
         </div>
     </nav>
+
+    <div class="flex content">
+
+        <div class="flex content-music">
+            <div class="" id="music">
+                <div id="cover"></div>
+                <div id="media-tags">
+                  <div class="song-data">
+                    <h2 id="title-artist">Title</h2>
+                  </div>
+                </div>
+                <div class="music-player">
+                    <audio id="audio" controls>
+                      
+                    </audio>
+                </div>
+                <div class="flex functions">
+                    <div id="back" onclick="back()">
+                        <span class="material-icons">
+                            arrow_back_ios
+                        </span>
+                    </div>
+                    <div id="next" onclick="next()">
+                        <span class="material-icons">
+                            arrow_forward_ios
+                        </span>
+                    </div>
+                    <div class="lyric-file">
+                        <label for="lyric-upload">
+                            <span class="material-icons">
+                                lyrics
+                            </span>
+                        </label>
+                        <input type="file" id="lyric-upload" accept=".mp3">
+                    </div>    
+                    <div class="music-file">
+                        <label for="music-upload">
+                            <span class="material-icons">
+                                audio_file
+                            </span>
+                        </label>
+                        <input type="file" id="music-upload" accept=".mp3">
+                    </div>    
+                </div>
+                
+              </div>
+        </div>
+        <div class="flex content-lyrics">
+            <div>
+                
+            </div>
+        </div>
+    </div>
 </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js" integrity="sha512-YsR46MmyChktsyMMou+Bs74oCa/CDdwft7rJ5wlnmDzMj1mzqncsfJamEEf99Nk7IB0JpTMo5hS8rxB49FUktQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+    <script src="js/music.js"></script>
 </html>
