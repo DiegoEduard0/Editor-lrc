@@ -1,0 +1,23 @@
+* {
+    font-family: 'Barlow', sans-serif;
+    color: #3b234a;
+}
+
+body {
+    background-color: #d4c7bf;
+}
+
+.flex {
+    display: flex;
+}
+
+.menu  {
+    background-color: #c3bbc9;
+    justify-content: center;
+}
+
+.color1 { color: #3b234a };
+.color2 { color: #523961 };
+.color3 { color: #baafc4 };
+.color4 { color: #c3bbc9 };
+.color5 { color: #d4c7bf };
