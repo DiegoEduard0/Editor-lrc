@@ -7,6 +7,10 @@ body {
     background-color: #d4c7bf;
 }
 
+span {
+    user-select: none;
+}
+
 .flex {
     display: flex;
 }
@@ -18,7 +22,6 @@ body {
 
 .content {
     justify-content: space-around;
-    height: 500px;
 }
 
 .content-music {
@@ -46,11 +49,11 @@ audio::-webkit-media-controls-volume-slider {
 }
 
 
-#music{
+#music, .timers-lyrics {
     margin-top: 4vh;
 }
 
-#music span{
+#music span, .functions-lyrics span{
     font-size: 40px;
 }
 
@@ -58,14 +61,14 @@ audio::-webkit-media-controls-volume-slider {
     display: none;
 }
 
-.functions {
+.functions-music, .functions-lyrics {
     margin-top: 1vh;
     flex-direction: row;
     justify-content: center;
 }
 
 
-.lyric-file label, .music-file label, .functions span{
+.lyric-file label, .music-file label, .functions-music span, .functions-lyrics span, .inputs span {
     cursor: pointer;
 }
 
@@ -74,8 +77,70 @@ audio::-webkit-media-controls-volume-slider {
 }
 
 .content-lyrics {
-    justify-content: center;
+    flex-direction: column;
     width: 60vw;
+    height: 74vh;
+}
+
+.timers-lyrics {
+    justify-content: space-around;
+    overflow-y: auto;
+}
+
+.content-lyrics input{
+    background-color: transparent;
+    border: none;
+}
+
+.content-lyrics input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.inputs {
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 2%;
+}
+
+.timers {
+    width: 20%;
+}
+
+.timer {
+    width: 90%;
+    height: auto;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+    all: unset; 
+    min-width: 21px;
+    min-height: 45px;
+    margin: 17px;
+    padding: 0px;
+    background-image: 
+    linear-gradient(to top, transparent 0px, transparent 16px, #c3bbc9 16px, #c3bbc9 26px, transparent 26px, transparent 35px, #3b234a 35px,#3b234a 36px,transparent 36px, transparent 40px),
+    linear-gradient(to right, transparent 0px, transparent 10px, #3b234a 10px, #3b234a 11px, transparent 11px, transparent 21px);
+    transform: rotate(90deg) scale(0.8, 0.9);
+    cursor:pointer;
+  }
+  
+
+.lyrics {
+    width: 70%;
+    height: auto;
+}
+
+.lyric {
+    width: 95%;
+}
+
+.timers, .lyrics {
+    background-color: #c3bbc9;
+    border: 3px solid;
+    border-color: #3b234a;
+    border-radius: 20px;
+    justify-content: center;
 }
 
 .color1 { color: #3b234a };

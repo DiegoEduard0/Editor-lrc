@@ -31,11 +31,11 @@
                   </div>
                 </div>
                 <div class="music-player">
-                    <audio id="audio" controls>
+                    <audio id="audio" controls src="default/music/AURORA - Runaway.mp3">
                       
                     </audio>
                 </div>
-                <div class="flex functions">
+                <div class="flex functions-music">
                     <div id="back" onclick="back()">
                         <span class="material-icons">
                             arrow_back_ios
@@ -52,7 +52,7 @@
                                 lyrics
                             </span>
                         </label>
-                        <input type="file" id="lyric-upload" accept=".mp3">
+                        <input type="file" id="lyric-upload" accept=".lrc">
                     </div>    
                     <div class="music-file">
                         <label for="music-upload">
@@ -67,13 +67,32 @@
               </div>
         </div>
         <div class="flex content-lyrics">
-            <div>
+            <div class="timers-lyrics" id="timers-lyrics">
                 
             </div>
+            <div class="flex functions-lyrics">
+                <div id="back" onclick="remove()">
+                    <span class="material-icons">
+                        remove
+                    </span>
+                </div>
+                <div id="next" onclick="add()">
+                    <span class="material-icons">
+                        add
+                    </span>
+                </div>
+                <div class="lyric-file">
+                    <span class="material-icons">
+                        save
+                    </span>  
+                </div>      
+            </div>
         </div>
+        
     </div>
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js" integrity="sha512-YsR46MmyChktsyMMou+Bs74oCa/CDdwft7rJ5wlnmDzMj1mzqncsfJamEEf99Nk7IB0JpTMo5hS8rxB49FUktQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/script.js"></script>
     <script src="js/music.js"></script>
+    <script src="js/lyrics.js"></script>
 </html>
