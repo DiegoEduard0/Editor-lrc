@@ -5,7 +5,7 @@ let lyric = [];
 window.addEventListener("load", loadInicial());
 
 function loadInicial() {
-    timersLyrics.innerHTML += addLineLyric(timePlayerFormat(audio.currentTime), 'Insira a frase da letra da musica aqui!')
+    timersLyrics.innerHTML += addLineLyric(timePlayerFormat(audio.currentTime), 'Insira o verso da letra da musica aqui!')
 }
 
 lyric_upload.addEventListener("change", (event) => {
@@ -52,7 +52,7 @@ function convertLyricAndShow(lyric) {
 }
 
 function remove() {
-    console.log(audio.currentTime);
+    timersLyrics.innerHTML = '';
 }
 
 function add() {
@@ -74,6 +74,25 @@ function add() {
 function newTime(time) {
     timer = time.parentNode.querySelector("#timer");
     timer.value = timePlayerFormat(audio.currentTime);
+}
+
+function save() {
+    let arrayInputs = [];
+    let inputs = timersLyrics.getElementsByTagName('input');
+
+    for (let i = 0; i < inputs.length; i += 2) {
+        let input = [];
+        input = [inputs[i].value, inputs[i+1].value];
+        arrayInputs.push(input);
+    }
+
+    text = '';
+    arrayInputs.forEach(i => {
+        text += '[' + i[0] + ']' + i[1] + '\n'
+    })
+
+    let blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, 'teste' + ".txt");
 }
 
 function removeInput(input) {
@@ -146,6 +165,21 @@ function somar(x) {
     timer.value = timeFormat(minutes ,seconds ,milliseconds);
 }
 
+function play(x){
+    let timer = x.parentNode.parentNode.querySelector("#timer");
+    console.log(timer);
+    if(!timer.value) {
+        return;
+    }
+    time = timer.value.match(/[(\d)]/g);
+    minutes = parseInt(time[0] + time[1]);
+    seconds = parseInt(time[2] + time[3]);
+    milliseconds = parseInt(time[4] + time[5] + time[6]);
+    time = parseFloat((minutes * 60) + seconds + '.' + milliseconds);
+    audio.currentTime = time;
+    audio.play();
+}
+
 function timeFormat(minutes ,seconds ,milliseconds) {
     if(minutes >= 1 && minutes <= 9) {
         minutes = '0'+ minutes;
@@ -212,7 +246,7 @@ function addLineLyric(time, lyric) {
         add
     </span>
     <div class="flex timers">
-        <input type="text" class="timer" id="timer" oninput="mascara(this)" value="${time}">
+        <input type="text" class="timer" id="timer" oninput="mascara(this)" value="${time}" inputmode="numeric">
         <span class="material-icons" onclick="subtrair(this)">
             remove
         </span>
@@ -224,7 +258,10 @@ function addLineLyric(time, lyric) {
         link
     </span>
     <div class="flex lyrics">
-        <input type="text" class="lyric" value="${lyric}">
+        <input type="text" class="lyric" spellcheck="false" value="${lyric}">
+        <span class="material-icons" onclick="play(this)">
+            play_arrow
+        </span>
     </div>
     <span onclick="removeInput(this)" class="material-icons">
         remove
