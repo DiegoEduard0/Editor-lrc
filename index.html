@@ -23,16 +23,15 @@
     <div class="flex content">
 
         <div class="flex content-music">
-            <div class="" id="music">
-                <div id="cover"></div>
-                <div id="media-tags">
+            <div class="flex" id="music">
+                <div class="flex" id="cover"></div>
+                <div class="flex" id="media-tags">
                   <div class="song-data">
                     <h2 id="title-artist">Title</h2>
                   </div>
                 </div>
-                <div class="music-player">
+                <div class="flex music-player">
                     <audio id="audio" controls src="default/music/AURORA - Runaway.mp3">
-                      
                     </audio>
                 </div>
                 <div class="flex functions-music">
@@ -63,17 +62,16 @@
                         <input type="file" id="music-upload" accept=".mp3">
                     </div>    
                 </div>
-                
-              </div>
+            </div>
         </div>
-        <div class="flex content-lyrics">
+        <div class="flex content-lyrics" id="content-lyrics">
             <div class="timers-lyrics" id="timers-lyrics">
-                
+                 
             </div>
             <div class="flex functions-lyrics">
                 <div id="back" onclick="remove()">
                     <span class="material-icons">
-                        remove
+                        clear_all
                     </span>
                 </div>
                 <div id="next" onclick="add()">
@@ -81,7 +79,7 @@
                         add
                     </span>
                 </div>
-                <div class="lyric-file">
+                <div class="lyric-file" onclick="save()">
                     <span class="material-icons">
                         save
                     </span>  
@@ -92,7 +90,7 @@
     </div>
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js" integrity="sha512-YsR46MmyChktsyMMou+Bs74oCa/CDdwft7rJ5wlnmDzMj1mzqncsfJamEEf99Nk7IB0JpTMo5hS8rxB49FUktQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/music.js"></script>
     <script src="js/lyrics.js"></script>
 </html>
