@@ -8,7 +8,6 @@ window.addEventListener("load", loadMusic(music));
 
 music_upload.addEventListener("change", (event) => {
     let file = event.target.files[0];
-    console.log(file);
     loadMusic(file);
 })
 
@@ -17,15 +16,12 @@ function loadMusic(file) {
     if(!file.src) {
         audio.setAttribute("src", URL.createObjectURL(file));
         f = file;
-        console.log(f);
     } else {
         audio.setAttribute("src", file.src);
         f = file.src
-        console.log(f);
     }
     new jsmediatags.Reader(f).setTagsToRead(["artist", "lyrics", "picture", "title"]).read({
         onSuccess: function(tag) {
-            console.log(tag);
             try{ 
                 const data = tag.tags.picture.data;
                 const format = tag.tags.picture.format;
