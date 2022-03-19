@@ -20,6 +20,15 @@ span {
     justify-content: center;
 }
 
+#git {
+    position: fixed;
+    top: 3%;
+    right: 6%;
+}
+#git span {
+    font-size: 35px;
+}
+
 .content {
     justify-content: space-around;
 }
@@ -132,8 +141,11 @@ input[type=number]::-webkit-inner-spin-button {
     linear-gradient(to right, transparent 0px, transparent 10px, #3b234a 10px, #3b234a 11px, transparent 11px, transparent 21px);
     transform: rotate(90deg) scale(0.8, 0.9);
     cursor:pointer;
-  }
+}
   
+#link {
+    cursor: default;
+}
 
 .lyrics {
     width: 70%;
@@ -169,12 +181,11 @@ input[type=number]::-webkit-inner-spin-button {
 
     .content-music {
         width: 100vw;
-        
     }
 
     .content-lyrics {
         width: 99%;
-        height: 35vh;
+        height: 60vh;
     }
 
     .timers {
@@ -182,8 +193,13 @@ input[type=number]::-webkit-inner-spin-button {
     }
 }
 
-.color1 { color: #3b234a };
-.color2 { color: #523961 };
-.color3 { color: #baafc4 };
-.color4 { color: #c3bbc9 };
-.color5 { color: #d4c7bf };
+.timers-lyrics::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: transparent;
+}
+
+.timers-lyrics::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #3b234a;
+}
