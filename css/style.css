@@ -22,9 +22,10 @@ span {
 
 #git {
     position: fixed;
-    top: 3%;
+    top: 1%;
     right: 6%;
 }
+
 #git span {
     font-size: 35px;
 }
