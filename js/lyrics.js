@@ -23,10 +23,20 @@ function loadLyric(event) {
 
 function convertLyricAndShow(lyric) {
     let lrc = [];
-    re = /\[([\d]{2}):([\d]{2}).([\d]{2})\]/g
-    resultTime = lyric.match(re)
+    let re1 = /\[([\d]{2}):([\d]{2}).([\d]{2})\]/g;
+    let re2 = /\[([\d]{2}):([\d]{2}).([\d]{3})\]/g;
+    let resultTime = undefined;
+    let resultLyric = undefined;
+    if (lyric.match(re1)) {
+        resultTime = lyric.match(re1);
+        resultLyric = lyric.replace(re1, '')
+    } else {
+        resultTime = lyric.match(re2);
+        resultLyric = lyric.replace(re2, '')
+    }
+      
     console.log(resultTime);
-    resultLyric = lyric.replace(re, '')
+    
     resultLyric = resultLyric.split(/(\r\n|\n|\r)/gm)
     for(let i = 0; i < resultLyric.length; i++) {
         if(resultLyric[i].indexOf("[", 0) == 0 && resultLyric[i].indexOf("]", resultLyric[i].length-1) > 0 
@@ -86,13 +96,14 @@ function save() {
         arrayInputs.push(input);
     }
 
-    text = '';
+    let text = '';
     arrayInputs.forEach(i => {
         text += '[' + i[0] + ']' + i[1] + '\n'
     })
 
     let blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, 'teste' + ".txt");
+    let title = document.getElementById('title-artist').textContent;
+    saveAs(blob, title + ".lrc");
 }
 
 function removeInput(input) {
@@ -215,7 +226,15 @@ function timeFormat(minutes ,seconds ,milliseconds) {
 function timeLrcFormat(value) {
     val = value
     value = parseFloat(value);
-    if(value >= 100 && value <= 999.99) {
+    console.log(value);
+    if (value > 999 && value < 10000) {
+        value = value.toString();
+        sec = parseFloat(value.substr(2))
+        min = parseFloat(value.substr(0, 2))
+        time = (min * 60) + sec
+        time = parseFloat(time.toFixed(2))
+        return timePlayerFormat(time);
+    }else if(value >= 100 && value <= 999.99) {
         value = value.toString();
         sec = parseFloat(value.substr(1))
         min = parseFloat(value.substr(0, 1))
@@ -224,6 +243,8 @@ function timeLrcFormat(value) {
         return timePlayerFormat(time);
     } else if(value > 0 && value < 60) {
         return timePlayerFormat(value);
+    } else if(value == 0) {
+        return '00:00.000'
     }
 }
 
@@ -254,7 +275,7 @@ function addLineLyric(time, lyric) {
             add
         </span>
     </div>
-    <span class="material-icons">
+    <span class="material-icons" id="link">
         link
     </span>
     <div class="flex lyrics">
