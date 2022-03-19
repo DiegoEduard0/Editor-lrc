@@ -15,7 +15,6 @@ lyric_upload.addEventListener("change", (event) => {
 function loadLyric(event) {
     let file = new FileReader();
     file.onload = () => {
-        console.log(file.result);
         convertLyricAndShow(file.result)
       }
     file.readAsText(event.target.files[0]);
@@ -27,6 +26,7 @@ function convertLyricAndShow(lyric) {
     let re2 = /\[([\d]{2}):([\d]{2}).([\d]{3})\]/g;
     let resultTime = undefined;
     let resultLyric = undefined;
+
     if (lyric.match(re1)) {
         resultTime = lyric.match(re1);
         resultLyric = lyric.replace(re1, '')
@@ -35,14 +35,11 @@ function convertLyricAndShow(lyric) {
         resultLyric = lyric.replace(re2, '')
     }
       
-    console.log(resultTime);
-    
     resultLyric = resultLyric.split(/(\r\n|\n|\r)/gm)
     for(let i = 0; i < resultLyric.length; i++) {
         if(resultLyric[i].indexOf("[", 0) == 0 && resultLyric[i].indexOf("]", resultLyric[i].length-1) > 0 
           || resultLyric[i] == "\r\n" || resultLyric[i] == "\n" || resultLyric[i] == "\r") {
             resultLyric[i] = ''
-            console.log('remove []');
         }
     }
     resultLyric = resultLyric.filter(r => r)
@@ -53,7 +50,7 @@ function convertLyricAndShow(lyric) {
         let x = [resultTime[i], resultLyric[i]];
         lrc.push(x);
     }
-    console.log(lrc);
+
     timersLyrics.innerHTML = '';
     lrc.forEach(l => {
         timersLyrics.innerHTML += addLineLyric(timeLrcFormat(l[0]), l[1])
@@ -112,6 +109,7 @@ function removeInput(input) {
 
 function mascara(i){
     let v = i.value;
+
     if(isNaN(v[v.length-1])) {
         i.value = v.substring(0, v.length-1);
         return;
@@ -123,12 +121,12 @@ function mascara(i){
 
 function subtrair(x) {
     let timer = x.parentNode.querySelector("#timer");
-    console.log(timer.value);
-    time = timer.value.match(/[(\d)]/g);
-    minutes = parseInt(time[0] + time[1]);
-    seconds = parseInt(time[2] + time[3]);
-    milliseconds = parseInt(time[4] + time[5] + time[6]);
+    let time = timer.value.match(/[(\d)]/g);
+    let minutes = parseInt(time[0] + time[1]);
+    let seconds = parseInt(time[2] + time[3]);
+    let milliseconds = parseInt(time[4] + time[5] + time[6]);
     milliseconds -= 200;
+
     if(minutes <= 0 && seconds <= 0 && milliseconds <= 0) {
         timer.value = '00:00.000';
         return;
@@ -137,55 +135,50 @@ function subtrair(x) {
         milliseconds *= -1;
         milliseconds = 1000 - milliseconds;
         seconds -= 1;
-        console.log('mili');
     }
     if(seconds < 0){
         seconds = 59;
         minutes -= 1;
-        console.log('second');
     }
     if(minutes < 0) {
         minutes = 0;
     }
-    
-    console.log('subtrair');
     
     timer.value = timeFormat(minutes ,seconds ,milliseconds);
 }
 
 function somar(x) {
     let timer = x.parentNode.querySelector("#timer");
-    !timer.value ? timer.value = '00:00.000' : 
-    time = timer.value.match(/[(\d)]/g);
-    minutes = parseInt(time[0] + time[1]);
-    seconds = parseInt(time[2] + time[3]);
-    milliseconds = parseInt(time[4] + time[5] + time[6]);
+    let time = '';
+    !timer.value ? timer.value = '00:00.000' : time = timer.value.match(/[(\d)]/g);
+    let minutes = parseInt(time[0] + time[1]);
+    let seconds = parseInt(time[2] + time[3]);
+    let milliseconds = parseInt(time[4] + time[5] + time[6]);
     milliseconds += 200;
+
     if(milliseconds > 999) {
         milliseconds -= 1000;
         seconds += 1;
-        console.log('mili');
     }
     if(seconds > 59){
         seconds = 0;
         minutes += 1;
-        console.log('second');
     }
-    console.log('somar');
-    console.log(`${minutes}:${seconds}.${milliseconds}`);
+
     timer.value = timeFormat(minutes ,seconds ,milliseconds);
 }
 
 function play(x){
     let timer = x.parentNode.parentNode.querySelector("#timer");
-    console.log(timer);
+
     if(!timer.value) {
         return;
     }
-    time = timer.value.match(/[(\d)]/g);
-    minutes = parseInt(time[0] + time[1]);
-    seconds = parseInt(time[2] + time[3]);
-    milliseconds = parseInt(time[4] + time[5] + time[6]);
+
+    let time = timer.value.match(/[(\d)]/g);
+    let minutes = parseInt(time[0] + time[1]);
+    let seconds = parseInt(time[2] + time[3]);
+    let milliseconds = parseInt(time[4] + time[5] + time[6]);
     time = parseFloat((minutes * 60) + seconds + '.' + milliseconds);
     audio.currentTime = time;
     audio.play();
@@ -219,26 +212,25 @@ function timeFormat(minutes ,seconds ,milliseconds) {
         milliseconds = '000';
     }   
 
-    console.log("time format");
     return `${minutes}:${seconds}.${milliseconds}`;
 }
 
 function timeLrcFormat(value) {
     val = value
     value = parseFloat(value);
-    console.log(value);
+
     if (value > 999 && value < 10000) {
         value = value.toString();
-        sec = parseFloat(value.substr(2))
-        min = parseFloat(value.substr(0, 2))
-        time = (min * 60) + sec
+        let sec = parseFloat(value.substr(2))
+        let min = parseFloat(value.substr(0, 2))
+        let time = (min * 60) + sec
         time = parseFloat(time.toFixed(2))
         return timePlayerFormat(time);
-    }else if(value >= 100 && value <= 999.99) {
+    } else if(value >= 100 && value <= 999.99) {
         value = value.toString();
-        sec = parseFloat(value.substr(1))
-        min = parseFloat(value.substr(0, 1))
-        time = (min * 60) + sec
+        let sec = parseFloat(value.substr(1))
+        let min = parseFloat(value.substr(0, 1))
+        let time = (min * 60) + sec
         time = parseFloat(time.toFixed(2))
         return timePlayerFormat(time);
     } else if(value > 0 && value < 60) {
@@ -251,41 +243,41 @@ function timeLrcFormat(value) {
 function timePlayerFormat(value) {
     value = new Date(value * 1000)
 
-    minutes = parseInt(value.getUTCMinutes());
-    seconds = parseInt(value.getSeconds());
-    milliseconds = parseInt(value.getMilliseconds());
+    let minutes = parseInt(value.getUTCMinutes());
+    let seconds = parseInt(value.getSeconds());
+    let milliseconds = parseInt(value.getMilliseconds());
 
-    time = timeFormat(minutes ,seconds ,milliseconds);
-    console.log(time);
+    let time = timeFormat(minutes ,seconds ,milliseconds);
 
     return time;
 }
 
 function addLineLyric(time, lyric) {
-    return `<div class="flex inputs">
-    <span onclick="newTime(this)" class="material-icons">
-        add
-    </span>
-    <div class="flex timers">
-        <input type="text" class="timer" id="timer" oninput="mascara(this)" value="${time}" inputmode="numeric">
-        <span class="material-icons" onclick="subtrair(this)">
-            remove
-        </span>
-        <span class="material-icons" onclick="somar(this)">
+    return `
+    <div class="flex inputs">
+        <span onclick="newTime(this)" class="material-icons">
             add
         </span>
-    </div>
-    <span class="material-icons" id="link">
-        link
-    </span>
-    <div class="flex lyrics">
-        <input type="text" class="lyric" spellcheck="false" value="${lyric}">
-        <span class="material-icons" onclick="play(this)">
-            play_arrow
+        <div class="flex timers">
+            <input type="text" class="timer" id="timer" oninput="mascara(this)" value="${time}" inputmode="numeric">
+            <span class="material-icons" onclick="subtrair(this)">
+                remove
+            </span>
+            <span class="material-icons" onclick="somar(this)">
+                add
+            </span>
+        </div>
+        <span class="material-icons" id="link">
+            link
         </span>
-    </div>
-    <span onclick="removeInput(this)" class="material-icons">
-        remove
-    </span>
-</div>`
+        <div class="flex lyrics">
+            <input type="text" class="lyric" spellcheck="false" value="${lyric}">
+            <span class="material-icons" onclick="play(this)">
+                play_arrow
+            </span>
+        </div>
+        <span onclick="removeInput(this)" class="material-icons">
+            remove
+        </span>
+    </div>`
 }
